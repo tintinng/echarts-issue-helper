@@ -14,10 +14,10 @@
 
 - 你对你的项目的代码结构可能已经非常熟悉，但我们并不是。阅读、运行、分析一个完全陌生的项目是极其耗费时间和精力的。
 
-- 由于涉及了大量业务代码，问题可能是你的代码错误，而不是 Vue 的 bug 所导致的。
+- 由于涉及了大量业务代码，问题可能是你的代码错误，而不是 ECharts 的 bug 所导致的。
 
 一个最小化的重现意味着它精确地定位了 bug 本身 - 它应当只包含能够触发 bug 的**最少量**的代码。你应当尽可能地剔除任何跟该 bug 无关的部分。
 
 ##### 如何提供一个重现
 
-除非你的 bug 只有在构建工具下才能重现，否则我们建议使用诸如 [JSFiddle](https://jsfiddle.net/chrisvfritz/50wL7mdz/), [JSBin](https://jsbin.com) 或是 [Codepen](https://codepen.io) 这样的在线代码服务来提供重现。如果你的 bug 必须用到构建工具，那么我们建议使用 [vue-cli](https://github.com/vuejs/vue-cli) 来搭建一个新项目，推送到 GitHub 并提供仓库的链接。
+如果是跟配置项有关的问题，我们建议在 [Gallery](http://gallery.echartsjs.com/editor.html) 中新建一个能够复现你问题的作品后发给我们。如果涉及到配置项外的一些问题，或者项目比较复杂无法在 Gallery 中呈现，我们建议使用诸如 [JSFiddle](https://jsfiddle.net/chrisvfritz/50wL7mdz/), [JSBin](https://jsbin.com) 或是 [Codepen](https://codepen.io) 这样的在线代码服务来提供重现。

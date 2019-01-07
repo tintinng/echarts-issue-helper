@@ -13,7 +13,7 @@ export default {
   'title-title': 'Issue 标题',
 
   'version-title': '版本',
-  'version-subtitle': '请检查问题是否存在于 Vue 的最新版本中。',
+  'version-subtitle': '请检查问题是否存在于 ECharts 的最新版本中。',
 
   'repro-title': '重现链接',
   'repro-subtitle': require('./repro-subtitle.md'),

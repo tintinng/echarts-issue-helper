@@ -189,7 +189,7 @@ export default {
   },
 
   created () {
-    this.repo = getQuery().repo || 'vuejs/vue'
+    this.repo = getQuery().repo || 'apache/incubator-echarts'
   },
 
   methods: {

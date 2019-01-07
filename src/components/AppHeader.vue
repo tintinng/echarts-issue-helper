@@ -40,8 +40,7 @@ export default {
 @import "../style/imports"
 
 .app-header
-  background lighten($vue-ui-color-light-neutral, 60%)
-  border-bottom solid 1px $vue-ui-color-light-neutral
+  background-color #162436
 
   &,
   .container,
@@ -54,11 +53,11 @@ export default {
     max-width $page-width
     flex 100% 1 1
     justify-content space-between
-    padding 24px
+    padding 12px
     box-sizing border-box
 
   .brand
-    color $vue-ui-color-dark
+    color #fff
     .logo
       margin-right 8px
 
@@ -74,6 +73,6 @@ export default {
     cursor default
     &:not(.active)
       cursor pointer
-      color $vue-ui-color-dark
+      color #fff
 
 </style>
