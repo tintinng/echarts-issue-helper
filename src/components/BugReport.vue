@@ -214,7 +214,6 @@ export default {
       this.versions = this.versions.concat(releases.map(
         r => ({ value: /^v/.test(r.tag_name) ? r.tag_name.substr(1) : r.tag_name })
       ))
-
       const link = response.headers.get('Link')
 
       if (link && link.indexOf('rel="next"') > -1) {

@@ -13,20 +13,15 @@ export default {
   'title-title': 'Issue title',
 
   'version-title': 'Version',
-  'version-subtitle': 'Check if the issue is reproducible with the latest stable version of Vue.',
+  'version-subtitle': 'Check if the issue is reproducible with the latest stable version of ECharts.',
 
   'repro-title': 'Link to minimal reproduction',
   'repro-subtitle': require('./repro-subtitle.md'),
   'repro-modal-title': 'About Reproductions',
   'repro-modal': require('./repro-modal.md'),
-  'cli-repro-subtitle': require('./cli-repro-subtitle.md'),
-  'cli-no-repro': 'If your issue cannot be reproduced with code, check here.',
 
   'node-and-os-title': 'Node, npm/yarn and OS info',
   'node-and-os-subtitle': 'Please specify node.js version, npm or yarn version, OS name & version. Example: Node 10.7.0 / yarn 1.7.0 / Windows 10',
-
-  'cli-envinfo-title': 'Environment Info',
-  'cli-envinfo-subtitle': require('./cli-envinfo-subtitle.md'),
 
   'browser-and-os-title': 'Browser and OS info',
   'browser-and-os-subtitle': 'Please specify browser name & version, OS name & version. Example: Chrome 62 / Windows 10',

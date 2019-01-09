@@ -126,10 +126,8 @@
   <footer class="app-footer">
     <p>&hellip;</p>
     <small>
-      Built with
-      <a href="https://github.com/vuejs/vue-cli">vue-cli</a>
-      &centerdot;
-      Check out source on <a href="https://github.com/vuejs/vue-issue">GitHub</a>
+      Forked from 
+      <a href="https://github.com/vuejs/vue-issue-helper">vue-issue-helper</a>
     </small>
   </footer>
 </div>
@@ -247,4 +245,28 @@ export default {
 .app-footer
   text-align center
   margin 24px 0
+</style>
+
+
+<style lang="stylus" >
+// Override UI colors
+a
+  color: #a9334c
+  
+.container
+
+  .vue-ui-button
+  , .vue-ui-group-button.vue-ui-button:not(.selected):not(.flat)
+  , .vue-ui-input:not(.flat)>.content
+    background-color: #f7f9fb
+
+  .vue-ui-button.primary:not(.ghost):hover
+    background-color #293c55
+    color #fff
+  
+  .vue-ui-input>.content>.border
+    background  #293c55
+
+  .vue-ui-button.primary
+    color #293c55
 </style>

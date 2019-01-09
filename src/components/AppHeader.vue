@@ -66,6 +66,8 @@ export default {
 
   .nav-item
     list-style none
+    a
+      color #a9334c
   .nav-item + .nav-item
     margin-left 8px
 
