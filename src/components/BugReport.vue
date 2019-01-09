@@ -69,7 +69,6 @@
             type="url"
             v-model="attrs.reproduction"
             :disabled="isCLI && reproNotAvailable"
-            required
           />
 
           <template slot="subtitle">

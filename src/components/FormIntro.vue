@@ -33,7 +33,9 @@ export default {
 @import "../style/imports"
 
 .form-intro
-  padding 24px
+  padding 0px
   margin 24px 0
   border-radius $br
+  line-height 1.6em
+
 </style>

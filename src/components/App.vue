@@ -124,7 +124,6 @@
   </div>
 
   <footer class="app-footer">
-    <p>&hellip;</p>
     <small>
       Forked from 
       <a href="https://github.com/vuejs/vue-issue-helper">vue-issue-helper</a>
@@ -263,7 +262,15 @@ a
   .vue-ui-button.primary:not(.ghost):hover
     background-color #293c55
     color #fff
+
+  .vue-ui-button:not(.ghost):hover
+  , .vue-ui-group-button.vue-ui-button:not(.selected):not(.flat):not(.ghost):hover
+  , .vue-ui-dropdown.open .dropdown-trigger .vue-ui-button:not(.ghost)
+    background-color #ebf0f8
   
+  .vue-ui-input>.content
+    border 1px solid #ebf0f8
+
   .vue-ui-input>.content>.border
     background  #293c55
 

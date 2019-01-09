@@ -15,7 +15,7 @@ export default {
   'version-title': '版本',
   'version-subtitle': '请检查问题是否存在于 ECharts 的最新版本中。',
 
-  'repro-title': '重现链接',
+  'repro-title': '重现链接（可选）',
   'repro-subtitle': require('./repro-subtitle.md'),
   'repro-modal-title': '关于重现',
   'repro-modal': require('./repro-modal.md'),
