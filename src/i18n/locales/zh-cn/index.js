@@ -38,7 +38,7 @@ export default {
   'rationale-title': '这个功能解决了什么问题？',
   'rationale-subtitle': require('./rationale-subtitle.md'),
 
-  'proposal-title': '你期望的 API 是怎样的？',
+  'proposal-title': '您期望的 API 是怎样的？',
   'proposal-subtitle': require('./proposal-subtitle.md'),
 
   // preview
@@ -52,5 +52,5 @@ export default {
   'similar-issues': '类似的 issue',
   'show-more': '展开',
   'show-less': '收起',
-  'drop-warn': '由于 GitHub API 的限制，这里不支持图片拖拽上传功能。但是你可以先创建 issue，然后在 GitHub 的界面中上传需要的图片。'
+  'drop-warn': '由于 GitHub API 的限制，这里不支持图片拖拽上传功能。但是您可以先创建 issue，然后在 GitHub 的界面中上传需要的图片。'
 }

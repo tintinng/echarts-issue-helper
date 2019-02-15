@@ -15,7 +15,7 @@ export default {
   'version-title': 'Version',
   'version-subtitle': 'Check if the issue is reproducible with the latest stable version of ECharts.',
 
-  'repro-title': 'Link to minimal reproduction(optional)',
+  'repro-title': 'Link to minimal reproduction (optional)',
   'repro-subtitle': require('./repro-subtitle.md'),
   'repro-modal-title': 'About Reproductions',
   'repro-modal': require('./repro-modal.md'),
