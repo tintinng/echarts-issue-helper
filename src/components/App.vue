@@ -8,15 +8,15 @@
 
       <div class="common-fields vue-ui-grid col-2 default-gap">
         <VueFormField
-          :title="i18n('repo-title')"
-          :subtitle="i18n('repo-subtitle')"
+          :title="i18n('lang-title')"
+          :subtitle="i18n('lang-subtitle')"
           class="first-row"
         >
           <VueSelect
-            v-model="repo"
+            v-model="lang"
           >
             <VueSelectButton
-              v-for="option of repos"
+              v-for="option of langs"
               :key="option.id"
               :value="option.id"
               :label="option.name"
@@ -125,15 +125,17 @@
 
   <footer class="app-footer">
     <small>
-      Forked from 
+      Forked from
       <a href="https://github.com/vuejs/vue-issue-helper">vue-issue-helper</a>
+      to
+      <a href="https://github.com/ecomfe/echarts-issue-helper">echarts-issue-helper</a>
     </small>
   </footer>
 </div>
 </template>
 
 <script lang="babel">
-import { repos } from '../config'
+import { langs, repo } from '../config'
 import { getQuery, updateQuery } from '../helpers'
 
 import FormIntro from './FormIntro.vue'
@@ -163,8 +165,8 @@ export default {
       },
       show: false,
       preview: false,
-      repo: '',
-      repos,
+      lang: '',
+      langs,
       type: 'bug-report',
       versions: {},
     }
@@ -187,11 +189,13 @@ export default {
 
   created () {
     this.repo = getQuery().repo || 'apache/incubator-echarts'
+    this.lang = this.i18n('lang')
   },
 
   methods: {
     setLang (lang) {
       this.$lang = lang
+      this.lang = lang
       updateQuery({ lang })
     },
 
@@ -209,7 +213,9 @@ export default {
 
     create () {
       const title = encodeURIComponent(this.title).replace(/%2B/gi, '+')
-      const body = encodeURIComponent(this.generated.markdown).replace(/%2B/gi, '+')
+      const langMarker = this.lang === 'en' ? '<!-- This issue is in English. DO NOT REMOVE -->' : '';
+      const body = encodeURIComponent(this.generated.markdown + '\n' + langMarker)
+        .replace(/%2B/gi, '+').replace(/(%0A){3,}/gi, '%0A%0A')
       const label = this.type === 'feature-request' ? '&labels=feature%20request' : ''
       window.open(`https://github.com/${this.repo}/issues/new?title=${title}&body=${body}${label}`)
     },
@@ -251,7 +257,7 @@ export default {
 // Override UI colors
 a
   color: #a9334c
-  
+
 .container
 
   .vue-ui-button
@@ -267,7 +273,7 @@ a
   , .vue-ui-group-button.vue-ui-button:not(.selected):not(.flat):not(.ghost):hover
   , .vue-ui-dropdown.open .dropdown-trigger .vue-ui-button:not(.ghost)
     background-color #ebf0f8
-  
+
   .vue-ui-input>.content
     border 1px solid #ebf0f8
 

@@ -7,8 +7,9 @@ export default {
   'intro-modal': require('./intro-modal.md'),
 
   // bug report
-  'repo-title': '相关库',
-  'repo-subtitle': '请确保将 issue 发往相关的仓库。',
+  'lang': 'zh-cn',
+  'lang-title': '这个 issue 的内容是用以下语言写的',
+  'lang-subtitle': '表单是中文的，同样可以创建英文内容的 issue，并且我们强烈建议您这么做，这将使您的 issue 被更多人看懂',
   'type-title': '这是一个',
   'title-title': 'Issue 标题',
 

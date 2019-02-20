@@ -7,8 +7,9 @@ export default {
   'intro-modal': require('./intro-modal.md'),
 
   // bug report
-  'repo-title': 'I am opening an issue for',
-  'repo-subtitle': 'Please make sure to file the issue at appropriate repo.',
+  'lang': 'en',
+  'lang-title': 'I am opening an issue in',
+  'lang-subtitle': ' ', // space here, not sure why '' cannot work
   'type-title': 'This is a',
   'title-title': 'Issue title',
 
