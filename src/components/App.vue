@@ -8,23 +8,6 @@
 
       <div class="common-fields vue-ui-grid col-2 default-gap">
         <VueFormField
-          :title="i18n('lang-title')"
-          :subtitle="i18n('lang-subtitle')"
-          class="first-row"
-        >
-          <VueSelect
-            v-model="lang"
-          >
-            <VueSelectButton
-              v-for="option of langs"
-              :key="option.id"
-              :value="option.id"
-              :label="option.name"
-            />
-          </VueSelect>
-        </VueFormField>
-
-        <VueFormField
           :title="i18n('type-title')"
           class="first-row"
         >
