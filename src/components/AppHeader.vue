@@ -10,22 +10,6 @@
         >
         Issue Helper
       </a>
-
-      <ul class="nav">
-        <li
-          v-for="(locale, key) in $root.$locales"
-          :key="key"
-          class="nav-item"
-        >
-          <a
-            class="nav-link"
-            :class="{ active: lang === key }"
-            @click="$emit('change-lang', key)"
-          >
-            {{ locale._label }}
-          </a>
-        </li>
-      </ul>
     </div>
   </nav>
 </template>
