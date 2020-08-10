@@ -11,7 +11,6 @@
           :loading="loadingVersion"
           show-all
           show-max="30"
-          restrict-choice
           required
         />
       </VueFormField>
