@@ -2,6 +2,7 @@ const path = require('path')
 const merge = require('deepmerge')
 
 module.exports = {
+  publicPath: './',
   configureWebpack: {
     resolve: {
       symlinks: false
