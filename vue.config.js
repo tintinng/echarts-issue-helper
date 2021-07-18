@@ -6,7 +6,8 @@ module.exports = {
   configureWebpack: {
     resolve: {
       symlinks: false
-    }
+    },
+    devtool: 'source-map'
   },
 
   chainWebpack: config => {

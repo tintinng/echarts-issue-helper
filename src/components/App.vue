@@ -94,7 +94,8 @@
       class="medium"
       @close="show = false"
     >
-      <div class="default-body" v-html="generated.html"/>
+      <!-- <div class="default-body" v-html="generated.html"/> -->
+      <Preview :generated='generated' ></Preview>
 
       <div slot="footer" class="actions">
         <VueButton
@@ -126,6 +127,7 @@ import AppHeader from './AppHeader.vue'
 import BugReport from './BugReport.vue'
 import FeatureRequest from './FeatureRequest.vue'
 import search from '../mixins/github-search'
+import Preview from './Preview.vue'
 
 export default {
   name: 'App',
@@ -136,7 +138,8 @@ export default {
     FormIntro,
     AppHeader,
     BugReport,
-    FeatureRequest
+    FeatureRequest,
+    Preview
   },
 
   data () {
