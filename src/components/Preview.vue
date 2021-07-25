@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import 'highlight.js/styles/github.css';
 export default {
   props: ['generated']
 }
@@ -12,6 +13,6 @@ export default {
 
 <style scoped>
 @import "../style/github/github-markdown.css";
-@import "../style/github/hljs-github.min.css";
+/* @import "../style/github/hljs-github.min.css"; */
 @import "../style/github/pilcrow.css";
 </style>

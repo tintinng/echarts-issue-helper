@@ -22,6 +22,7 @@
           v-model="attrs.proposal"
           required
         />
+        <ImgUpload @upload="insertImg"/>
         <i18n slot="subtitle" id="proposal-subtitle"/>
       </VueFormField>
     </div>
@@ -30,8 +31,12 @@
 
 <script>
 import { generate } from '../helpers'
+import ImgUpload from './ImgUpload.vue'
 
 export default {
+  components: {
+    ImgUpload
+  },
   data () {
     return {
       attrs: {
@@ -52,6 +57,10 @@ ${rationale}
 ### What does the proposed API look like?
 ${proposal}
   `.trim())
+    },
+    // update
+    insertImg (value) {
+      console.log(value)
     }
   }
 }
