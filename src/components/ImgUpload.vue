@@ -42,7 +42,6 @@ export default {
                 formDatas.append(`files${idx}`, file)
             })
             axios.post(this.uploadUrl, formDatas, config).then(res => {
-                console.log(res)
                 this.fileAsserts = res.data.fileAsserts
                 this.$emit('upload', this.fileAsserts)
             })

@@ -9,6 +9,7 @@
           rows="4"
           v-model="attrs.rationale"
           required
+          @focus="saveInsertPos('rationale', $event)"
         />
         <i18n slot="subtitle" id="rationale-subtitle"/>
       </VueFormField>
@@ -21,6 +22,7 @@
           rows="4"
           v-model="attrs.proposal"
           required
+          @focus="saveInsertPos('proposal', $event)"
         />
         <ImgUpload @upload="insertImg"/>
         <i18n slot="subtitle" id="proposal-subtitle"/>
@@ -30,7 +32,7 @@
 </template>
 
 <script>
-import { generate } from '../helpers'
+import { generate, insertAtCursor } from '../helpers'
 import ImgUpload from './ImgUpload.vue'
 
 export default {
@@ -43,6 +45,10 @@ export default {
         rationale: '',
         proposal: ''
       },
+      inserted: {
+        field: {},
+        attr: ''
+      }
     }
   },
 
@@ -60,7 +66,13 @@ ${proposal}
     },
     // update
     insertImg (value) {
-      console.log(value)
+      // 在textarea元素中插入值
+      this.attrs[this.inserted.attr] = insertAtCursor(this.inserted.field, `![](${value})`)
+    },
+    // 保存获取焦点的textarea和监听的attr
+    saveInsertPos(attr, event) {
+      this.inserted.field = event.target
+      this.inserted.attr = attr
     }
   }
 }
