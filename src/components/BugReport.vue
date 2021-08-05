@@ -91,6 +91,7 @@
           rows="4"
           v-model="attrs.steps"
           required
+          @focus="saveInsertPos('steps', $event)"
         />
         <i18n slot="subtitle" id="steps-subtitle"/>
       </VueFormField>
@@ -103,6 +104,7 @@
           rows="4"
           v-model="attrs.expected"
           required
+          @focus="saveInsertPos('expected', $event)"
         />
       </VueFormField>
 
@@ -114,6 +116,7 @@
           rows="4"
           v-model="attrs.actual"
           required
+          @focus="saveInsertPos('actual', $event)"
         />
       </VueFormField>
 
@@ -126,6 +129,7 @@
           type="textarea"
           rows="4"
           v-model="attrs.extra"
+          @focus="saveInsertPos('extra', $event)"
         />
       </VueFormField>
     </div>
@@ -140,16 +144,20 @@
         <i18n id="repro-modal"/>
       </div>
     </VueModal>
+    <ImgUpload @upload="insertImg"/>
   </div>
 </template>
 
 <script>
 import { gt, lt } from 'semver'
-import { generate } from '../helpers'
+import { generate, insertAtCursor } from '../helpers'
+import ImgUpload from './ImgUpload.vue'
 
 export default {
   props: ['repo'],
-
+  components: {
+    ImgUpload
+  },
   data () {
     return {
       show: false,
@@ -163,6 +171,10 @@ export default {
         browserAndOS: '',
         nodeAndOS: '',
         cliEnvInfo: '',
+      },
+      inserted: {
+        field: {},
+        attr: ''
       },
       versions: [],
       loadingVersion: false,
@@ -264,6 +276,19 @@ ${actual}
 
 ${extra ? `---\n${extra}` : ''}
   `.trim())
+    },
+
+    // update
+    insertImg (images) {
+      images.forEach(image => {
+        // 在textarea元素中插入值
+        this.attrs[this.inserted.attr] = insertAtCursor(this.inserted.field, `![](${image})\n`)
+      });
+    },
+    // 保存获取焦点的textarea和监听的attr
+    saveInsertPos(attr, event) {
+      this.inserted.field = event.target
+      this.inserted.attr = attr
     }
   },
 }

@@ -19,7 +19,8 @@ export default {
     prop: ['title'],
     data() {
         return {
-            uploadUrl: 'http://121.40.96.103:8100/upload',
+            // uploadUrl: 'http://121.40.96.103:8100/upload',
+            uploadUrl: 'http://localhost:8100/upload',
             fileAsserts: []
         }
     },
@@ -38,8 +39,9 @@ export default {
             const config = {
                 headers: { "Content-Type": "multipart/form-data" }
             }
-            Array.prototype.forEach.call(files, (file, idx) => {
-                formDatas.append(`files${idx}`, file)
+            Array.prototype.forEach.call(files, file => {
+                // append同一个key会追加为一个数组
+                formDatas.append(`images`, file)
             })
             axios.post(this.uploadUrl, formDatas, config).then(res => {
                 this.fileAsserts = res.data.fileAsserts
@@ -52,5 +54,10 @@ export default {
 </script>
 
 <style scoped>
-
+label {
+    color: #CA8090;
+}
+label:hover {
+    cursor: pointer;
+}
 </style>

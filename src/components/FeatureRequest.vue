@@ -24,9 +24,9 @@
           required
           @focus="saveInsertPos('proposal', $event)"
         />
-        <ImgUpload @upload="insertImg"/>
         <i18n slot="subtitle" id="proposal-subtitle"/>
       </VueFormField>
+      <ImgUpload @upload="insertImg"/>
     </div>
   </div>
 </template>
@@ -65,9 +65,11 @@ ${proposal}
   `.trim())
     },
     // update
-    insertImg (value) {
-      // 在textarea元素中插入值
-      this.attrs[this.inserted.attr] = insertAtCursor(this.inserted.field, `![](${value})`)
+    insertImg (images) {
+      images.forEach(image => {
+        // 在textarea元素中插入值
+        this.attrs[this.inserted.attr] = insertAtCursor(this.inserted.field, `![](${image})\n`)
+      });
     },
     // 保存获取焦点的textarea和监听的attr
     saveInsertPos(attr, event) {
