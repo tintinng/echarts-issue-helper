@@ -20,23 +20,22 @@ export default {
     prop: ['title'],
     data() {
         return {
-            uploadUrl: 'http://121.40.96.103:8100/upload',
-            // uploadUrl: 'http://localhost:8100/upload',
             fileAsserts: [],
-            owner: 'tintinng',
-            selectedRepos: 'Imgs-bed',
-            path: 'echarts-helper-images/',
-            imgUploadUrl: '',
+            owner: 'ding_zhi_chao',
+            selectedRepos: 'imgs_bed',
+            path: 'Echart-issue-helper/',
             imgData: {
+                owner: 'ding_zhi_chao',
+                repo: 'imgs_bed',
                 message: 'image put from echarts-issue-helper',
-                branch: 'main',
+                branch: 'master',
                 content: '',
                 commiter: {
-                    name: 'tintinng',
+                    name: 'ding_zhi_chao',
                     email: '906183742@qq.com'
                 }
             },
-            token: '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'
+            token: '3be676d570cfe9715eb364d807ad4966'
         }
     },
     methods: {
@@ -51,12 +50,12 @@ export default {
                   // upload image
                     const { name, hash, suffix } = fileNameHandler(files[i].name)
                     const filename = `${name}.${hash}.${suffix}`
-                    const imgUploadUrl = `https://api.github.com/repos/${this.owner}/${this.selectedRepos}/contents/${this.path}${filename}`
+                    const imgUploadUrl = `https://gitee.com/api/v5/repos/${this.owner}/${this.selectedRepos}/contents/${this.path}${filename}`
                     const imgData = Object.assign(this.imgData)
                     reader.onload = (e) => {
                         imgData.content = `${e.target.result.split(',')[1]}`
                         this.$emit('putStart', true)
-                        axios.put(imgUploadUrl, imgData, {
+                        axios.post(imgUploadUrl, imgData, {
                             headers: {
                                 'Content-Type': 'application/json',
                                 Authorization: `token ${this.token}`
