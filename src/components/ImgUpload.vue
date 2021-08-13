@@ -32,40 +32,45 @@ export default {
                 branch: 'main',
                 content: '',
                 commiter: {
-                    name: `${this.owner}`,
+                    name: 'tintinng',
                     email: '906183742@qq.com'
                 }
             },
-            token: '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'
+            token: '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'
         }
     },
     methods: {
         // onchange: read file from fs
         attachImg (event) {
-          let reader = new FileReader(), files = event.target.files
-          if (/image/.test(files[0].type)) {
-              reader.readAsDataURL(files[0])
+          this.fileAsserts.length = 0
+          let files = event.target.files
+          // 多图像上传
+          for (let i = 0, n = files.length; i < n; i++) {
+              let reader = new FileReader()
+              if (/image/.test(files[i].type)) {
+                  // upload image
+                    const { name, hash, suffix } = fileNameHandler(files[i].name)
+                    const filename = `${name}.${hash}.${suffix}`
+                    const imgUploadUrl = `https://api.github.com/repos/${this.owner}/${this.selectedRepos}/contents/${this.path}${filename}`
+                    const imgData = Object.assign(this.imgData)
+                    reader.onload = (e) => {
+                        imgData.content = `${e.target.result.split(',')[1]}`
+                        axios.put(imgUploadUrl, imgData, {
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Authorization: `token ${this.token}`
+                            }
+                        }).then(res => {
+                            const uploadFile = res.data.content.download_url
+                            this.fileAsserts.push(uploadFile)
+                            // console.log('上传并获取完成: ', this.fileAsserts.length)
+                            this.$emit('upload', [uploadFile])
+                        })
+                    }
+                    reader.readAsDataURL(files[i])
+              }
           }
-          // 处理上传的图像文件名
-          const { name, hash, suffix } = fileNameHandler(files[0].name)
-          const filename = `${name}.${hash}.${suffix}`
-          this.imgUploadUrl = `https://api.github.com/repos/${this.owner}/${this.selectedRepos}/contents/${this.path}${filename}`
-        // upload image
-        //   reader.onload = this.uploadImage(files)
-          reader.onload = () => {
-            // 读取图像的base64值
-            this.imgData.content = `${reader.result.split(',')[1]}`
-            axios.put(this.imgUploadUrl, this.imgData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${this.token}`
-                }
-            }).then(res => {
-                const uploadFile = res.data.content.download_url
-                this.fileAsserts.push(uploadFile)
-                this.$emit('upload', this.fileAsserts)
-            })
-          }
+        // reader.onload = this.uploadImage(files)
         },
         uploadImage(files) {
             const formDatas = new FormData()
