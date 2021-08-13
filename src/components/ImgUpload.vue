@@ -36,7 +36,7 @@ export default {
                     email: '906183742@qq.com'
                 }
             },
-            token: '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'
+            token: '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'
         }
     },
     methods: {
@@ -55,6 +55,7 @@ export default {
                     const imgData = Object.assign(this.imgData)
                     reader.onload = (e) => {
                         imgData.content = `${e.target.result.split(',')[1]}`
+                        this.$emit('putStart', true)
                         axios.put(imgUploadUrl, imgData, {
                             headers: {
                                 'Content-Type': 'application/json',
@@ -64,7 +65,9 @@ export default {
                             const uploadFile = res.data.content.download_url
                             this.fileAsserts.push(uploadFile)
                             // console.log('上传并获取完成: ', this.fileAsserts.length)
-                            this.$emit('upload', [uploadFile])
+                            this.$emit('putEnd', [uploadFile])
+                        }).catch(e => {
+                            this.$emit('error', e)
                         })
                     }
                     reader.readAsDataURL(files[i])
@@ -83,7 +86,7 @@ export default {
             })
             axios.post(this.uploadUrl, formDatas, config).then(res => {
                 this.fileAsserts = res.data.fileAsserts
-                this.$emit('upload', this.fileAsserts)
+                this.$emit('putEnd', this.fileAsserts)
             })
         }
     }

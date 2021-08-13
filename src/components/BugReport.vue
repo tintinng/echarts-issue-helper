@@ -92,6 +92,7 @@
           v-model="attrs.steps"
           required
           @focus="saveInsertPos('steps', $event)"
+          :loadingRight="loading.steps"
         />
         <i18n slot="subtitle" id="steps-subtitle"/>
       </VueFormField>
@@ -105,6 +106,7 @@
           v-model="attrs.expected"
           required
           @focus="saveInsertPos('expected', $event)"
+          :loadingRight="loading.expected"
         />
       </VueFormField>
 
@@ -117,6 +119,7 @@
           v-model="attrs.actual"
           required
           @focus="saveInsertPos('actual', $event)"
+          :loadingRight="loading.actual"
         />
       </VueFormField>
 
@@ -130,6 +133,7 @@
           rows="4"
           v-model="attrs.extra"
           @focus="saveInsertPos('extra', $event)"
+          :loadingRight="loading.extra"
         />
       </VueFormField>
     </div>
@@ -144,7 +148,14 @@
         <i18n id="repro-modal"/>
       </div>
     </VueModal>
-    <ImgUpload @upload="insertImg"/>
+    <ImgUpload 
+          @putEnd="insertImg" 
+          @putStart="uploadStart"
+          @error="() => {
+            const { attr, field } = insertedAttrs.shift()
+            loading[attr] = false
+          }"
+      />
   </div>
 </template>
 
@@ -172,9 +183,16 @@ export default {
         nodeAndOS: '',
         cliEnvInfo: '',
       },
-      inserted: {
+      focused: {
         field: {},
-        attr: ''
+        attr: '',
+      },
+      insertedAttrs: [],
+      loading: {
+        'steps': false,
+        'expected': false,
+        'actual': false,
+        'extra': false
       },
       versions: [],
       loadingVersion: false,
@@ -277,18 +295,26 @@ ${actual}
 ${extra ? `---\n${extra}` : ''}
   `.trim())
     },
-
-    // update
+    // 开始上传图片,保存上传时的attr和filed
+    uploadStart() {
+      this.insertedAttrs.push({
+        attr: this.focused.attr,
+        field: this.focused.field
+      })
+      this.loading[this.focused.attr] = true
+    },
     insertImg (images) {
+      const { attr, field } = this.insertedAttrs.shift()
       images.forEach(image => {
         // 在textarea元素中插入值
-        this.attrs[this.inserted.attr] = insertAtCursor(this.inserted.field, `![](${image})\n`)
-      });
+        this.attrs[attr] = insertAtCursor(field, `![](${image})\n`)
+        this.loading[attr] = false
+      })
     },
     // 保存获取焦点的textarea和监听的attr
     saveInsertPos(attr, event) {
-      this.inserted.field = event.target
-      this.inserted.attr = attr
+      this.focused.attr = attr
+      this.focused.field = event.target
     }
   },
 }

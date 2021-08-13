@@ -10,6 +10,7 @@
           v-model="attrs.rationale"
           required
           @focus="saveInsertPos('rationale', $event)"
+          :loadingRight="loading.rationale"
         />
         <i18n slot="subtitle" id="rationale-subtitle"/>
       </VueFormField>
@@ -23,10 +24,18 @@
           v-model="attrs.proposal"
           required
           @focus="saveInsertPos('proposal', $event)"
+          :loadingRight="loading.proposal"
         />
         <i18n slot="subtitle" id="proposal-subtitle"/>
       </VueFormField>
-      <ImgUpload @upload="insertImg"/>
+      <ImgUpload 
+          @putEnd="insertImg" 
+          @putStart="uploadStart"
+          @error="() => {
+            const { attr, field } = insertedAttrs.shift()
+            loading[attr] = false
+          }"
+      />
     </div>
   </div>
 </template>
@@ -45,10 +54,15 @@ export default {
         rationale: '',
         proposal: ''
       },
-      inserted: {
+      loading: {
+        rationale: false,
+        proposal: false
+      },
+      focused: {
         field: {},
         attr: ''
-      }
+      },
+      insertedAttrs: []
     }
   },
 
@@ -64,17 +78,26 @@ ${rationale}
 ${proposal}
   `.trim())
     },
-    // update
+    // 开始上传图片,保存上传时的attr和filed
+    uploadStart() {
+      this.insertedAttrs.push({
+        attr: this.focused.attr,
+        field: this.focused.field
+      })
+      this.loading[this.focused.attr] = true
+    },
     insertImg (images) {
+      const { attr, field } = this.insertedAttrs.shift()
       images.forEach(image => {
         // 在textarea元素中插入值
-        this.attrs[this.inserted.attr] = insertAtCursor(this.inserted.field, `![](${image})\n`)
-      });
+        this.attrs[attr] = insertAtCursor(field, `![](${image})\n`)
+        this.loading[attr] = false
+      })
     },
     // 保存获取焦点的textarea和监听的attr
     saveInsertPos(attr, event) {
-      this.inserted.field = event.target
-      this.inserted.attr = attr
+      this.focused.attr = attr
+      this.focused.field = event.target
     }
   }
 }
