@@ -4,13 +4,19 @@
       <VueFormField
         :title="i18n('rationale-title')"
       >
-        <VueInput
+        <!-- <VueInput
           type="textarea"
           rows="4"
           v-model="attrs.rationale"
           required
           @focus="saveInsertPos('rationale', $event)"
           :loadingRight="loading.rationale"
+        /> -->
+        <MDEditor
+          v-model="attrs.rationale" 
+          ref="mde"
+          @focus="saveInsertPos('rationale', $event)"
+          @insert="insertmdImages('rationale', $event)"
         />
         <i18n slot="subtitle" id="rationale-subtitle"/>
       </VueFormField>
@@ -43,10 +49,12 @@
 <script>
 import { generate, insertAtCursor } from '../helpers'
 import ImgUpload from './ImgUpload.vue'
+import MDEditor from './MDEditor.vue'
 
 export default {
   components: {
-    ImgUpload
+    ImgUpload,
+    MDEditor
   },
   data () {
     return {
@@ -98,7 +106,14 @@ ${proposal}
     saveInsertPos(attr, event) {
       this.focused.attr = attr
       this.focused.field = event.target
+    },
+    // 收到MDEditor的insert内容并修改对应的值
+    insertmdImages(attr, val) {
+      this.attrs[attr] = val
     }
   }
 }
 </script>
+<style scoped>
+@import '~simplemde/dist/simplemde.min.css';
+</style>

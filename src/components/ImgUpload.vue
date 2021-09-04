@@ -8,7 +8,13 @@
         multiple
         style="display: none;"
         @change="attachImg"/>
-    <label for="img-upload">Attach image</label>
+    <label for="img-upload">
+        <slot>Attach image</slot>
+    </label>
+    <VueLoadingIndicator
+        v-if="loading"
+        class="loadingRight"
+    />
   </div>
 </template>
 
@@ -20,6 +26,7 @@ export default {
     prop: ['title'],
     data() {
         return {
+            loading: false,
             fileAsserts: [],
             owner: 'ding_zhi_chao',
             selectedRepos: 'imgs_bed',
@@ -55,6 +62,7 @@ export default {
                     reader.onload = (e) => {
                         imgData.content = `${e.target.result.split(',')[1]}`
                         this.$emit('putStart', true)
+                        this.loading = true
                         axios.post(imgUploadUrl, imgData, {
                             headers: {
                                 'Content-Type': 'application/json',
@@ -64,8 +72,10 @@ export default {
                             const uploadFile = res.data.content.download_url
                             this.fileAsserts.push(uploadFile)
                             // console.log('上传并获取完成: ', this.fileAsserts.length)
+                            this.loading = false
                             this.$emit('putEnd', [uploadFile])
                         }).catch(e => {
+                            this.loading = false
                             this.$emit('error', e)
                         })
                     }
@@ -99,5 +109,10 @@ label {
 }
 label:hover {
     cursor: pointer;
+}
+
+.loadingRight {
+    float: right;
+    margin-left: 18px;
 }
 </style>
