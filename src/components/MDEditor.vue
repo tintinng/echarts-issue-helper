@@ -156,18 +156,24 @@ export default {
       this.$emit('focus', val);
     },
     insertImg(images) {
-      // 获取选择的起始和结束坐标
-      const from = {
-        line: this.simplemde.codemirror.getCursor('from').line,
-        ch: this.simplemde.codemirror.getCursor('from').ch
-      }
-      const to = {
-        line: this.simplemde.codemirror.getCursor('to').line,
-        ch: this.simplemde.codemirror.getCursor('to').ch
-      }
       images.forEach(image => {
+        // 获取选择的起始和结束坐标
+        const from = {
+          line: this.simplemde.codemirror.getCursor('from').line,
+          ch: this.simplemde.codemirror.getCursor('from').ch
+        }
+        const to = {
+          line: this.simplemde.codemirror.getCursor('to').line,
+          ch: this.simplemde.codemirror.getCursor('to').ch
+        }
+        const imgStr = `![](${image})\n`
         // 替代选中的内容
-        this.simplemde.codemirror.replaceRange(`![](${image})\n`, from, to)
+        this.simplemde.codemirror.replaceRange(imgStr, from, to)
+        // 修改完后重新设置cursor到当前插入图片位置的后边
+        this.simplemde.codemirror.setCursor({
+          line: to.line,
+          ch: to.ch + imgStr.length
+        })
         // 修改editor绑定的textarea的value
         this.$refs.textarea_mde.value = this.simplemde.codemirror.getValue()
       })

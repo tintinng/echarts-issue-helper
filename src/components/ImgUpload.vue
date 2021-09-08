@@ -73,7 +73,9 @@ export default {
                             this.fileAsserts.push(uploadFile)
                             // console.log('上传并获取完成: ', this.fileAsserts.length)
                             this.loading = false
-                            this.$emit('putEnd', [uploadFile])
+                            if (this.fileAsserts.length === n) {
+                                this.$emit('putEnd', this.fileAsserts)
+                            }
                         }).catch(e => {
                             this.loading = false
                             this.$emit('error', e)
@@ -82,22 +84,7 @@ export default {
                     reader.readAsDataURL(files[i])
               }
           }
-        // reader.onload = this.uploadImage(files)
         },
-        uploadImage(files) {
-            const formDatas = new FormData()
-            const config = {
-                headers: { "Content-Type": "multipart/form-data" }
-            }
-            Array.prototype.forEach.call(files, file => {
-                // append同一个key会追加为一个数组
-                formDatas.append(`images`, file)
-            })
-            axios.post(this.uploadUrl, formDatas, config).then(res => {
-                this.fileAsserts = res.data.fileAsserts
-                this.$emit('putEnd', this.fileAsserts)
-            })
-        }
     }
 }
 
