@@ -3,13 +3,13 @@
     <textarea
       class="vue-simplemde-textarea"
       :name="name"
-      ref="textarea_mde"
+      :ref="refProp"
       :value="modelValue"
       @input="handleInput($event.target.value)"
       @focus="handleFocus($event.target.value)"
     />
     <div class="simplemde-imgupload">
-        <img-upload @putEnd="insertImg">
+        <img-upload :inputId="`${refProp}_img`" @putEnd="insertImg">
             click to attach image
         </img-upload>
     </div>
@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import SimpleMDE from 'simplemde';
-import marked from 'marked';
+import SimpleMDE from 'simplemde'
+import marked from 'marked'
 import ImgUpload from './ImgUpload.vue'
 
 export default {
@@ -31,6 +31,7 @@ export default {
       ImgUpload
   },
   props: {
+    refProp: String,
     value: String,
     modelValue: String,
     name: String,
@@ -175,10 +176,10 @@ export default {
           ch: to.ch + imgStr.length
         })
         // 修改editor绑定的textarea的value
-        this.$refs.textarea_mde.value = this.simplemde.codemirror.getValue()
+        this.$refs[this.refProp].value = this.simplemde.codemirror.getValue()
       })
-      this.$emit('insert', this.$refs.textarea_mde.value)
-      this.simplemde.value(this.$refs.textarea_mde.value)
+      this.$emit('insert', this.$refs[this.refProp].value)
+      this.simplemde.value(this.$refs[this.refProp].value)
     }
   },
   destroyed() {

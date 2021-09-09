@@ -148,14 +148,14 @@
         <i18n id="repro-modal"/>
       </div>
     </VueModal>
-    <ImgUpload 
+    <!-- <ImgUpload 
           @putEnd="insertImg" 
           @putStart="uploadStart"
           @error="() => {
             const { attr, field } = insertedAttrs.shift()
             loading[attr] = false
           }"
-      />
+      /> -->
   </div>
 </template>
 

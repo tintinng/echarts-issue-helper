@@ -4,11 +4,11 @@
     <input
         type="file" 
         accept="imgae/*" 
-        id="img-upload" 
+        :id="inputId"
         multiple
         style="display: none;"
         @change="attachImg"/>
-    <label for="img-upload">
+    <label :for="inputId">
         <slot>Attach image</slot>
     </label>
     <VueLoadingIndicator
@@ -23,7 +23,9 @@ import axios from 'axios'
 import { fileNameHandler } from '../helpers/index'
 
 export default {
-    prop: ['title'],
+    props: {
+        inputId: String
+    },
     data() {
         return {
             loading: false,
