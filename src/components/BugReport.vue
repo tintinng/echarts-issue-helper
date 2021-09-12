@@ -86,13 +86,10 @@
         class="span-2"
         :title="i18n('steps-title')"
       >
-        <VueInput
-          type="textarea"
-          rows="4"
-          v-model="attrs.steps"
-          required
-          @focus="saveInsertPos('steps', $event)"
-          :loadingRight="loading.steps"
+        <MDEditor
+          v-model="attrs.steps" 
+          refProp="mde_steps"
+          size="middle"
         />
         <i18n slot="subtitle" id="steps-subtitle"/>
       </VueFormField>
@@ -100,26 +97,20 @@
       <VueFormField
         :title="i18n('expected-title')"
       >
-        <VueInput
-          type="textarea"
-          rows="4"
-          v-model="attrs.expected"
-          required
-          @focus="saveInsertPos('expected', $event)"
-          :loadingRight="loading.expected"
+        <MDEditor
+          v-model="attrs.expected" 
+          refProp="mde_expected"
+          size="middle"
         />
       </VueFormField>
 
       <VueFormField
         :title="i18n('actual-title')"
       >
-        <VueInput
-          type="textarea"
-          rows="4"
-          v-model="attrs.actual"
-          required
-          @focus="saveInsertPos('actual', $event)"
-          :loadingRight="loading.actual"
+        <MDEditor
+          v-model="attrs.actual" 
+          refProp="mde_actual"
+          size="middle"
         />
       </VueFormField>
 
@@ -128,12 +119,10 @@
         :title="i18n('extra-title')"
         :subtitle="i18n('extra-subtitle')"
       >
-        <VueInput
-          type="textarea"
-          rows="4"
-          v-model="attrs.extra"
-          @focus="saveInsertPos('extra', $event)"
-          :loadingRight="loading.extra"
+        <MDEditor
+          v-model="attrs.extra" 
+          refProp="mde_extra"
+          size="middle"
         />
       </VueFormField>
     </div>
@@ -148,26 +137,18 @@
         <i18n id="repro-modal"/>
       </div>
     </VueModal>
-    <!-- <ImgUpload 
-          @putEnd="insertImg" 
-          @putStart="uploadStart"
-          @error="() => {
-            const { attr, field } = insertedAttrs.shift()
-            loading[attr] = false
-          }"
-      /> -->
   </div>
 </template>
 
 <script>
 import { gt, lt } from 'semver'
 import { generate, insertAtCursor } from '../helpers'
-import ImgUpload from './ImgUpload.vue'
+import MDEditor from './MDEditor.vue'
 
 export default {
   props: ['repo'],
   components: {
-    ImgUpload
+    MDEditor
   },
   data () {
     return {

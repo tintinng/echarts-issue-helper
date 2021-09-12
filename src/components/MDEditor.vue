@@ -1,5 +1,5 @@
 <template>
-  <div class="vue-simplemde">
+  <div class="vue-simplemde" :class="'mde-' + size">
     <textarea
       class="vue-simplemde-textarea"
       :name="name"
@@ -36,6 +36,10 @@ export default {
     modelValue: String,
     name: String,
     previewClass: String,
+    size: {
+      type: String,
+      default: 'middle'
+    },
     autoinit: {
       type: Boolean,
       default() {
@@ -179,7 +183,7 @@ export default {
         this.$refs[this.refProp].value = this.simplemde.codemirror.getValue()
       })
       this.$emit('insert', this.$refs[this.refProp].value)
-      this.simplemde.value(this.$refs[this.refProp].value)
+      // this.simplemde.value(this.$refs[this.refProp].value)
     }
   },
   destroyed() {
@@ -223,10 +227,17 @@ export default {
     border-bottom-right-radius: 4px;
 }
 
-/deep/.CodeMirror {
+.mde-middle /deep/.CodeMirror {
     background: #F7F9FB;
-    height: 260px;
-    max-height: 260px;
+    height: 280px;
+    max-height: 280px;
+    min-height: 280px;
+}
+.mde-small /deep/.CodeMirror {
+    background: #F7F9FB;
+    height: 80px;
+    max-height: 80px;
+    min-height: 80px;
 }
 
 /deep/.CodeMirror-wrap pre {

@@ -4,14 +4,6 @@
       <VueFormField
         :title="i18n('rationale-title')"
       >
-        <!-- <VueInput
-          type="textarea"
-          rows="4"
-          v-model="attrs.rationale"
-          required
-          @focus="saveInsertPos('rationale', $event)"
-          :loadingRight="loading.rationale"
-        /> -->
         <MDEditor
           v-model="attrs.rationale" 
           refProp="mde_rationale"
@@ -22,14 +14,6 @@
       <VueFormField
         :title="i18n('proposal-title')"
       >
-        <!-- <VueInput
-          type="textarea"
-          rows="4"
-          v-model="attrs.proposal"
-          required
-          @focus="saveInsertPos('proposal', $event)"
-          :loadingRight="loading.proposal"
-        /> -->
         <MDEditor
           v-model="attrs.proposal" 
           refProp="mde_proposal"
@@ -42,12 +26,10 @@
 
 <script>
 import { generate } from '../helpers'
-import ImgUpload from './ImgUpload.vue'
 import MDEditor from './MDEditor.vue'
 
 export default {
   components: {
-    ImgUpload,
     MDEditor
   },
   data () {
