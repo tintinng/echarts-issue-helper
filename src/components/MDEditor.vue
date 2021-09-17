@@ -8,11 +8,11 @@
       @input="handleInput($event.target.value)"
       @focus="handleFocus($event.target.value)"
     />
-    <div class="simplemde-imgupload">
+    <!-- <div class="simplemde-imgupload">
         <img-upload :inputId="`${refProp}_img`" @putEnd="insertImg">
             click to attach image
         </img-upload>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -90,7 +90,7 @@ export default {
         previewRender: this.previewRender,
         renderingConfig: {},
         tabSize: 1,
-        toolbar: ["bold", "italic", "heading", "|", "quote"],
+        toolbar: ["bold", "italic", "link", "code", "|", "unordered-list", "ordered-list"],
         // toolbarTips: false
         status: false
       }, this.configs)
